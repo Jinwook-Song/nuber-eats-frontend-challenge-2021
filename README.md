@@ -1,46 +1,23 @@
-# Getting Started with Create React App
+# Nuber Eats Frontend Challenge: Quiz 10
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **Code Challenge**
 
-## Available Scripts
+- 프론트 엔드 파트 시작입니다.
+- 챌린지 기간은 2일입니다.
+- 이번 챌린지 과제에서는 전에 만든 백엔드 API를 이용하여 로그인을 구현하도록 합니다.
+  - [ ] Router 설정(react-router-dom을 이용하여)
+  - [ ] apollo-client 설정
+  - [ ] react-hooks-form을 이용하여 로그인 스크린과 Form을 만듭니다.
+  - [ ] login mutation을 만듭니다(useMutation).
+  - [ ] 로그인 token을 저장하도록 합니다
+- 로그인 한 유저를 보여주는 페이지는 reactive variables를 이용합니다.
+- 샌드박스의 보일러플레이트에는 TailwindCSS 가 링크되어 있습니다. UI 디자인은 너무 신경 안쓰셔도 됩니다. 이 후 챌린지 과제로 나옵니다.
 
-In the project directory, you can run:
+## **TA's 힌트**
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 강의에 나온대로 router를 로그인 한 경우, 로그인 하지 않은 경우로 나눠서 생각하시면 쉽습니다.
+- makeVar, useReactiveVar를 사용합니다.
+- apollo codegen이 기억 나시나요? 안타깝게 코드샌드박스에서는 apollo codegen을 사용할 수가 없습니다. 방법은 두 가지가 있습니다.
+- 방법1: useMutation, useQuery 등의 함수에 type 제공 없이 사용할 수 있도록 설정되어 있습니다.
+- 방법2: 코드샌드박스 코드를 다운 받아서 진행한다.(**[후기의 #Assignment 12](https://nomadcoders.co/community/thread/294)** 참고)
+- 토큰은 localStorage에 저장하는 방법을 이용합니다.
