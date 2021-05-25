@@ -1,1 +1,15 @@
-export const LoggedOutRouter = () => <span>Logged Out</span>;
+import { isLoggedInVar } from "../apollo";
+
+export const LoggedInRouter = () => {
+  const onClick = () => {
+    isLoggedInVar(false);
+    localStorage.removeItem("token");
+  };
+
+  return (
+    <div>
+      <h1>Logged In</h1>
+      <button onClick={onClick}>Click to logout</button>
+    </div>
+  );
+};
