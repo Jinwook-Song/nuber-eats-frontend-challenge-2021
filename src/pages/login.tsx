@@ -1,8 +1,13 @@
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { isLoggedInVar } from "../apollo";
+import { Link } from "react-router-dom";
+import { authToken, isLoggedInVar } from "../apollo";
+import { Button } from "../components/button";
 import { FormError } from "../components/form-error";
+import { LS_TOKEN } from "../constants";
+import nomadLogo from "../images/nomadLogo.jpg";
 import {
   loginMutation,
   loginMutationVariables,
@@ -28,8 +33,10 @@ export const Login = () => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors },
-  } = useForm<ILoginForm>();
+    formState: { errors, isValid },
+  } = useForm<ILoginForm>({
+    mode: "onChange", // validation check (onBlur also available)
+  });
 
   const onCompleted = (data: loginMutation) => {
     const {
@@ -37,7 +44,8 @@ export const Login = () => {
     } = data;
     if (ok && token) {
       console.log(token);
-      localStorage.setItem("token", token);
+      localStorage.setItem(LS_TOKEN, token);
+      authToken(token);
       isLoggedInVar(true);
     } else {
       console.log(error);
@@ -67,19 +75,31 @@ export const Login = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-800">
-      <div className="bg-white w-full max-w-lg pt-10 pb-7 rounded-lg text-center">
-        <h3 className="text-2xl text-gray-800">Log In</h3>
+    <div className="h-screen flex items-center flex-col pt-10 lg:pt-28 bg-black">
+      <Helmet>
+        <title>Login | Nomadland</title>
+      </Helmet>
+      <div className="w-full max-w-screen-sm flex flex-col items-center px-5">
+        <img alt="Nomadland" src={nomadLogo} className="w-52 mb-10" />
+        <h4 className="w-full font-medium text-left text-3xl mb-5 text-indigo-50">
+          Welcome back
+        </h4>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid gap-3 mt-5 px-5"
+          className="grid gap-3 mt-5 w-full mb-5"
         >
           <input
-            {...register("email", { required: "Email is required" })}
-            name="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                message: "Please enter a valid email",
+              },
+            })}
             type="email"
             placeholder="Email"
-            className="input"
+            className="bg-gray-100 shadow-inner focus:ring-2  focus:ring-yellow-400 focus:ring-opacity-90 focus:outline-none py-3 px-5 rounded-lg transition-colors"
           />
           {errors.email?.message && (
             <FormError errorMessage={errors.email?.message} />
@@ -89,24 +109,34 @@ export const Login = () => {
               required: "Password is required",
               minLength: 6,
             })}
-            name="password"
             type="password"
             placeholder="Password"
-            className="input"
+            className="bg-gray-100 shadow-inner focus:ring-2  focus:ring-yellow-400 focus:ring-opacity-90 focus:outline-none py-3 px-5 rounded-lg transition-colors"
           />
           {errors.password?.message && (
             <FormError errorMessage={errors.password?.message} />
           )}
           {errors.password?.type === "minLength" && (
-            <FormError errorMessage="Password must be more than 10 char." />
+            <FormError errorMessage="Password must be more than 6 char." />
           )}
-          <button className="btn mt-3">
-            {loading ? "Loading..." : "Log In"}
-          </button>
+          <Button //
+            canClick={isValid}
+            loading={loading}
+            actionText={"Log In"}
+          />
           {loginMutationResult?.login.error && (
             <FormError errorMessage={loginMutationResult?.login.error} />
           )}
         </form>
+        <div className="text-indigo-50">
+          New to Nomadland?{" "}
+          <Link
+            to="/create-account"
+            className="text-yellow-400 hover:underline"
+          >
+            Create an account
+          </Link>
+        </div>
       </div>
     </div>
   );

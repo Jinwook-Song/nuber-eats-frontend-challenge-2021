@@ -1,23 +1,19 @@
-# Nuber Eats Frontend Challenge: Quiz 10
+# Nuber Eats Frontend Challenge: Quiz 11
 
 ## **Code Challenge**
 
-- 프론트 엔드 파트 시작입니다.
-- 챌린지 기간은 2일입니다.
-- 이번 챌린지 과제에서는 전에 만든 백엔드 API를 이용하여 로그인을 구현하도록 합니다.
-  - [ ] Router 설정(react-router-dom을 이용하여)
-  - [ ] apollo-client 설정
-  - [ ] react-hooks-form을 이용하여 로그인 스크린과 Form을 만듭니다.
-  - [ ] login mutation을 만듭니다(useMutation).
-  - [ ] 로그인 token을 저장하도록 합니다
-- 로그인 한 유저를 보여주는 페이지는 reactive variables를 이용합니다.
-- 샌드박스의 보일러플레이트에는 TailwindCSS 가 링크되어 있습니다. UI 디자인은 너무 신경 안쓰셔도 됩니다. 이 후 챌린지 과제로 나옵니다.
+Today's **[solution](https://codesandbox.io/s/blissful-frost-1jypb)** comes from the awesome **[@yesky85](https://nomadcoders.co/users/yesky85)** ! **@yesky85** 님 was the first one to finish!
+
+- On today's challenge make the **'Create Account'** page, this includes the route, the mutations, the form, everything! And when you are done, make **'Login'** and **'Create Account'** page as **beautiful as possible**.
+- [ ]  Create Account 페이지를 만듭니다.
+- [ ]  Create Account 페이지와 Login 페이지를 최대한 꾸며 봅니다.
+- **[여기 웹페이지](https://mobbin.design/filter?categories=Music)** 참고하시면 몇몇 유명한 앱들의 로그인 페이지를 볼 수 있습니다. 여기서 디자인 아이디어를 얻어서 mobile-only UI 만드는데 참고하세요.
 
 ## **TA's 힌트**
 
-- 강의에 나온대로 router를 로그인 한 경우, 로그인 하지 않은 경우로 나눠서 생각하시면 쉽습니다.
-- makeVar, useReactiveVar를 사용합니다.
-- apollo codegen이 기억 나시나요? 안타깝게 코드샌드박스에서는 apollo codegen을 사용할 수가 없습니다. 방법은 두 가지가 있습니다.
-- 방법1: useMutation, useQuery 등의 함수에 type 제공 없이 사용할 수 있도록 설정되어 있습니다.
-- 방법2: 코드샌드박스 코드를 다운 받아서 진행한다.(**[후기의 #Assignment 12](https://nomadcoders.co/community/thread/294)** 참고)
-- 토큰은 localStorage에 저장하는 방법을 이용합니다.
+- 이전의 챌린지 과제였던 로그인 파트와 크게 다르지 않아서 무난하게 하실 수 있는 챌린지 과제입니다. tailwind와 react hook form, 쿼리어, apollo client가 아직 익숙치 않으신 분들은 많은 연습을 하실 수 있는 과제입니다.
+- create account 페이지는 이전에 login 페이지에서 사용한 코드들을 사용하시면 편리합니다.
+- react hook form을 이용하여 input을 작성하실 때에 여러가지 rules를 이용하여 다양하게 form의 validation과 message handling을 테스트 해보시길 추천드립니다.
+- ex. pattern, valid, maxLength, minLength 등등, react hook form의 **[register](https://react-hook-form.com/v6/api#register)** 페이지를 참고바랍니다.
+- useForm의 formState를 이용하여 form의 입력이 valid한지 테스트 해보세요.
+- nuber-eats 클론 강의처럼 버튼에 loading state를 관리해보시길 추천드립니다~! 강의에서는 useState를 이용하였습니다.

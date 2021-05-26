@@ -1,15 +1,36 @@
-import { isLoggedInVar } from "../apollo";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
+import { Header } from "../components/header";
+import { useMe } from "../hooks/useMe";
+import { Podcasts } from "../pages/host/podcast";
+
+const HostRoutes = [
+  <Route path="/" exact>
+    <Podcasts />
+  </Route>,
+];
 
 export const LoggedInRouter = () => {
-  const onClick = () => {
-    isLoggedInVar(false);
-    localStorage.removeItem("token");
-  };
-
+  // from api
+  const { data, loading, error } = useMe();
+  if (!data || loading || error) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <span className="font-medium text-xl tracking-wide">Loading...</span>
+      </div>
+    );
+  }
   return (
-    <div>
-      <h1>Logged In</h1>
-      <button onClick={onClick}>Click to logout</button>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        {data.me.role === "Host" && HostRoutes}
+        <Redirect to="/" />
+      </Switch>
+    </Router>
   );
 };
