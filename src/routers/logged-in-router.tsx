@@ -1,16 +1,20 @@
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header } from "../components/header";
 import { useMe } from "../hooks/useMe";
-import { Podcasts } from "../pages/host/podcast";
+import { NotFound } from "../pages/404";
+import { Episodes } from "../pages/listener/episodes";
+import { Podcasts } from "../pages/listener/podcasts";
+import { EditProfile } from "../pages/user/edit-profile";
 
-const HostRoutes = [
-  <Route path="/" exact>
+const ListenerRoutes = [
+  <Route key={1} path="/" exact>
     <Podcasts />
+  </Route>,
+  <Route key={2} path="/edit-profile" exact>
+    <EditProfile />
+  </Route>,
+  <Route key={3} path="/podcasts/:id" exact>
+    <Episodes />
   </Route>,
 ];
 
@@ -28,8 +32,10 @@ export const LoggedInRouter = () => {
     <Router>
       <Header />
       <Switch>
-        {data.me.role === "Host" && HostRoutes}
-        <Redirect to="/" />
+        {data.me.role === "Listener" && ListenerRoutes}
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
     </Router>
   );

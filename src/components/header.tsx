@@ -5,12 +5,14 @@ import nomadLogo from "../images/nomadLogo.jpg";
 
 export const Header: React.FC = () => {
   return (
-    <header className="py-4">
-      <div className="w-full px-5 xl:px-0 max-w-screen-xl mx-auto flex justify-between items-center">
-        <img src={nomadLogo} className="w-24" alt="Nomadland" />
+    <header className="py-4 bg-black">
+      <div className="w-full  px-5 xl:px-0 max-w-screen-xl mx-auto flex justify-between items-center">
+        <Link to='/'>
+        <img src={nomadLogo} className="w-9" alt="Nomadland" />
+        </Link>
         <span className="text-xs">
-          <Link to="/my-profile">
-            <FontAwesomeIcon icon={faUser} className="text-xl" />
+          <Link to="/edit-profile">
+            <FontAwesomeIcon icon={faUser} className="text-xl text-white" />
           </Link>
         </span>
       </div>
