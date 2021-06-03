@@ -3,13 +3,14 @@ import gql from "graphql-tag";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Button } from "../../components/button";
+import { FormError } from "../../components/form-error";
 import { useMe } from "../../hooks/useMe";
 import {
   editProfile,
   editProfileVariables,
 } from "../../__generated__/editProfile";
 
-const EDIT_PROFILE_MUTATION = gql`
+export const EDIT_PROFILE_MUTATION = gql`
   mutation editProfile($input: EditProfileInput!) {
     editProfile(input: $input) {
       ok
@@ -24,9 +25,10 @@ interface IFormProps {
 }
 
 export const EditProfile = () => {
-  const { data: userData } = useMe();
+  const { data: userData, refetch } = useMe();
   const client = useApolloClient();
   const onCompleted = (data: editProfile) => {
+    // refetch();
     const {
       editProfile: { ok },
     } = data;
@@ -61,7 +63,7 @@ export const EditProfile = () => {
     register,
     handleSubmit,
     getValues,
-    formState: { isValid },
+    formState: { errors, isValid },
   } = useForm<IFormProps>({
     mode: "onChange",
     defaultValues: {
@@ -71,14 +73,16 @@ export const EditProfile = () => {
   });
   const onSubmit = () => {
     const { email, password } = getValues();
-    editProfile({
-      variables: {
-        input: {
-          email,
-          ...(password !== "" && { password }),
+    if (!loading) {
+      editProfile({
+        variables: {
+          input: {
+            email,
+            ...(password !== "" && { password }),
+          },
         },
-      },
-    });
+      });
+    }
   };
   return (
     <div className="mt-52 flex flex-col justify-center items-center">
@@ -92,6 +96,7 @@ export const EditProfile = () => {
       >
         <input
           {...register("email", {
+            required: "Email is required",
             pattern: {
               value:
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -102,9 +107,12 @@ export const EditProfile = () => {
           type="email"
           placeholder="Email"
         />
+        {errors.email?.message && (
+          <FormError errorMessage={errors.email?.message} />
+        )}
         <input
           {...register("password", {
-            minLength: 6,
+            // minLength: 6,
           })}
           className="bg-gray-100 shadow-inner focus:ring-2  focus:ring-yellow-400 focus:ring-opacity-90 focus:outline-none py-3 px-5 rounded-lg transition-colors"
           type="password"

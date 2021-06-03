@@ -12,7 +12,7 @@ import {
 } from "../__generated__/createAccountMutation";
 import { UserRole } from "../__generated__/globalTypes";
 
-const CREATE_ACCOUNT_MUTATION = gql`
+export const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccountMutation($createAccountInput: CreateAccountInput!) {
     createAccount(input: $createAccountInput) {
       ok
@@ -36,7 +36,7 @@ export const CreateAccount = () => {
   } = useForm<ICreateAccountForm>({
     mode: "onChange",
     defaultValues: {
-      role: UserRole.Host,
+      role: UserRole.Listener,
     },
   });
 
@@ -46,7 +46,7 @@ export const CreateAccount = () => {
       createAccount: { ok, error },
     } = data;
     if (ok) {
-      alert("Account Create! Log in now!");
+      alert("Account Created! Log in now!");
       // redirect to login page
       history.push("/");
     } else {
@@ -78,7 +78,7 @@ export const CreateAccount = () => {
   return (
     <div className="h-screen flex items-center flex-col pt-10 lg:pt-28 bg-black">
       <Helmet>
-        <title>Create Account | Nomadlnad</title>
+        <title>Create Account | Nomadland</title>
       </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col items-center px-5 ">
         <img alt="Nomadland" src={nomadLogo} className="w-52 mb-10" />
@@ -108,7 +108,7 @@ export const CreateAccount = () => {
           <input
             {...register("password", {
               required: "Password is required",
-              minLength: 6,
+              // minLength: 6,
             })}
             type="password"
             placeholder="Password"
@@ -117,9 +117,9 @@ export const CreateAccount = () => {
           {errors.password?.message && (
             <FormError errorMessage={errors.password?.message} />
           )}
-          {errors.password?.type === "minLength" && (
+          {/* {errors.password?.type === "minLength" && (
             <FormError errorMessage="Password must be more than 6 char." />
-          )}
+          )} */}
           <select
             {...register("role", { required: true })}
             className="bg-gray-100 shadow-inner focus:ring-2  focus:ring-yellow-400 focus:ring-opacity-90 focus:outline-none py-3 px-5 rounded-lg"

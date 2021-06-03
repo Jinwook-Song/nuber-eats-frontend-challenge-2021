@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router";
 import { Episode } from "../../components/episode";
 import {
@@ -7,7 +8,7 @@ import {
   getEpisodesVariables,
 } from "../../__generated__/getEpisodes";
 
-const EPISODES_QUERY = gql`
+export const EPISODES_QUERY = gql`
   query getEpisodes($input: PodcastSearchInput!) {
     getEpisodes(input: $input) {
       error
@@ -39,6 +40,9 @@ export const Episodes = () => {
   );
   return (
     <div>
+      <Helmet>
+        <title>Episodes | Nomadland</title>
+      </Helmet>
       {!loading && (
         <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
           <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">

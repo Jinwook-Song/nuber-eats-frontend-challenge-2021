@@ -7,7 +7,7 @@ import { Podcast } from "../../components/podcast";
 import { LS_TOKEN } from "../../constants";
 import { getAllPodcastsQuery } from "../../__generated__/getAllPodcastsQuery";
 
-const PODCASTS_QUERY = gql`
+export const PODCASTS_QUERY = gql`
   query getAllPodcastsQuery {
     getAllPodcasts {
       error
@@ -24,7 +24,6 @@ const PODCASTS_QUERY = gql`
 
 export const Podcasts = () => {
   const { data, loading } = useQuery<getAllPodcastsQuery>(PODCASTS_QUERY);
-  console.log(data);
   return (
     <div>
       <Helmet>
