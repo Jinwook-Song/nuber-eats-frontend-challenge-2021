@@ -72,7 +72,7 @@ export const AddPodcast = () => {
       <Helmet>
         <title>Add Restaurant | Nomadland</title>
       </Helmet>
-      <h4 className="font-semibold text-2xl mb-3">Add Restaurant</h4>
+      <h4 className="font-semibold text-2xl mb-3">Add Podcast</h4>
       <form
         className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5"
         onSubmit={handleSubmit(onSubmit)}

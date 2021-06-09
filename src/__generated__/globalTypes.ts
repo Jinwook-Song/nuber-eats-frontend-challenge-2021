@@ -33,6 +33,10 @@ export interface LoginInput {
   password: string;
 }
 
+export interface MyPodcastInputType {
+  id: number;
+}
+
 export interface PodcastSearchInput {
   id: number;
 }

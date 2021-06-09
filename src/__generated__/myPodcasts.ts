@@ -9,23 +9,26 @@
 
 export interface myPodcasts_myPodcasts_podcasts_episodes {
   __typename: "Episode";
+  id: number;
   title: string;
   category: string;
 }
 
 export interface myPodcasts_myPodcasts_podcasts_reviews {
   __typename: "Review";
+  id: number;
   title: string;
   text: string;
 }
 
 export interface myPodcasts_myPodcasts_podcasts {
   __typename: "Podcast";
+  id: number;
   title: string;
   category: string;
   rating: number;
-  episodes: myPodcasts_myPodcasts_podcasts_episodes[];
-  reviews: myPodcasts_myPodcasts_podcasts_reviews[];
+  episodes: myPodcasts_myPodcasts_podcasts_episodes[] | null;
+  reviews: myPodcasts_myPodcasts_podcasts_reviews[] | null;
 }
 
 export interface myPodcasts_myPodcasts {

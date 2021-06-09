@@ -3,6 +3,7 @@ import { Header } from "../components/header";
 import { useMe } from "../hooks/useMe";
 import { NotFound } from "../pages/404";
 import { AddPodcast } from "../pages/host/add-podcast";
+import { MyPodcast } from "../pages/host/my-podcast";
 import { MyPodcasts } from "../pages/host/my-podcasts";
 import { Episodes } from "../pages/listener/episodes";
 import { Podcasts } from "../pages/listener/podcasts";
@@ -23,6 +24,10 @@ const hostRoutes = [
   {
     path: "/add-podcast",
     component: <AddPodcast />,
+  },
+  {
+    path: "/podcasts/:id",
+    component: <MyPodcast />,
   },
 ];
 const listenerRoutes = [
@@ -50,11 +55,6 @@ export const LoggedInRouter = () => {
     <Router>
       <Header />
       <Switch>
-        {commonRoutes.map((route) => (
-          <Route exact key={route.path} path={route.path}>
-            {route.component}
-          </Route>
-        ))}
         {data.me.role === UserRole.Host &&
           hostRoutes.map((route) => (
             <Route exact key={route.path} path={route.path}>
@@ -67,6 +67,11 @@ export const LoggedInRouter = () => {
               {route.component}
             </Route>
           ))}
+        {commonRoutes.map((route) => (
+          <Route exact key={route.path} path={route.path}>
+            {route.component}
+          </Route>
+        ))}
 
         <Route>
           <NotFound />
