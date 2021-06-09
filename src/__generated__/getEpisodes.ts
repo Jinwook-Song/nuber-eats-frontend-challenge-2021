@@ -14,7 +14,6 @@ export interface getEpisodes_getEpisodes_episodes {
   id: number;
   title: string;
   category: string;
-  rating: number;
 }
 
 export interface getEpisodes_getEpisodes {

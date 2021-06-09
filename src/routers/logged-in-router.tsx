@@ -2,20 +2,38 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header } from "../components/header";
 import { useMe } from "../hooks/useMe";
 import { NotFound } from "../pages/404";
+import { AddPodcast } from "../pages/host/add-podcast";
+import { MyPodcasts } from "../pages/host/my-podcasts";
 import { Episodes } from "../pages/listener/episodes";
 import { Podcasts } from "../pages/listener/podcasts";
 import { EditProfile } from "../pages/user/edit-profile";
+import { UserRole } from "../__generated__/globalTypes";
 
-const ListenerRoutes = [
-  <Route key={1} path="/" exact>
-    <Podcasts />
-  </Route>,
-  <Route key={2} path="/edit-profile" exact>
-    <EditProfile />
-  </Route>,
-  <Route key={3} path="/podcasts/:id" exact>
-    <Episodes />
-  </Route>,
+const commonRoutes = [
+  {
+    path: "/edit-profile",
+    component: <EditProfile />,
+  },
+];
+const hostRoutes = [
+  {
+    path: "/",
+    component: <MyPodcasts />,
+  },
+  {
+    path: "/add-podcast",
+    component: <AddPodcast />,
+  },
+];
+const listenerRoutes = [
+  {
+    path: "/",
+    component: <Podcasts />,
+  },
+  {
+    path: "/podcasts/:id",
+    component: <Episodes />,
+  },
 ];
 
 export const LoggedInRouter = () => {
@@ -32,7 +50,24 @@ export const LoggedInRouter = () => {
     <Router>
       <Header />
       <Switch>
-        {data.me.role === "Listener" && ListenerRoutes}
+        {commonRoutes.map((route) => (
+          <Route exact key={route.path} path={route.path}>
+            {route.component}
+          </Route>
+        ))}
+        {data.me.role === UserRole.Host &&
+          hostRoutes.map((route) => (
+            <Route exact key={route.path} path={route.path}>
+              {route.component}
+            </Route>
+          ))}
+        {data.me.role === UserRole.Listener &&
+          listenerRoutes.map((route) => (
+            <Route exact key={route.path} path={route.path}>
+              {route.component}
+            </Route>
+          ))}
+
         <Route>
           <NotFound />
         </Route>

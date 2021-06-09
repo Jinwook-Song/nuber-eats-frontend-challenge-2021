@@ -1,32 +1,46 @@
-# Nuber Eats Frontend Challenge: Quiz 13
+# Nuber Eats Frontend Challenge: Quiz 14 (Final)
 
-## **Code Challenge**
+## **Let's finish this!**
 
-Hi everyone! Here are the best submissions from the previous assignment!
+- 오늘의 강의: **[우버 이츠 클론코딩 강의 #24.0 - #24.3](https://nomadcoders.co/nuber-eats/lectures/2304)**
+- 오늘의 과제: 위의 강의를 시청하신 후, 아래 코드 챌린지를 제출하세요.
+- 제출기간: 5 Days Challenge (마지막 과제)
 
-- **[@tony .hwang.developer님의 work](https://codesandbox.io/s/z1hmr)**
-- **[@jonganebski 님의 work](https://codesandbox.io/s/mystifying-kepler-yxtqz)**
-- **[@tony 님의 work](https://codesandbox.io/s/podcast-frontend-forked-wuxsy)**
-- **[@sk97kang 님의 work](https://codesandbox.io/s/day21-22-htfj0)**
-- **[@dongyeol01 님의 work](https://codesandbox.io/s/nest-challenge-12-6r0k6)**
+## **졸업작품: 팟캐스트 앱**
 
-오늘의 블루프린트는 **[@tony .hwang.developer](https://nomadcoders.co/users/tony.hwang.developer)**의 작품 입니다.
+이제 마무리 시간입니다. 이번주 토요일 오전 6시까지 챌린지의 podcast discovery app을 완성하시고, 프론트엔드를 Netlify에 deploy하셔서 마무리 하세요. 아래는 구현할 것들입니다.
 
-- 오늘은 지금까지 만든 페이지(스크린)와 컴포넌트들을 테스트 할 차례입니다.
-- 현재 테스트 커버리지는 아래 그림과 같은 상태입니다. 이번 3일 동안의 목표는 아래 커버리지 상태를 100%로 만드는 것입니다(최대한, 할 수 있는 만큼).
+**Listener & Host**:
 
-![https://i.imgur.com/N8mNGg8.png](https://i.imgur.com/N8mNGg8.png)
+- [ ]  Create Account
+- [ ]  Log in
+- [ ]  Edit Profile
 
-- 블루프린트에서 `episodes.spec.tsx`, `podcasts.spec.tsx`, `login.spec.tsx` and `create-account.spec.tsx` 파일들을 보실 수 있습니다. 이 파일들은 이미 `mock-apollo-client`설정이 되어 있습니다.
-- 먼저 샌드박스에서 컴퓨터로 코드를 다운로드 하시고, `npm i` 한 후에 `npm run test:coverage`를 입력해보세요. 테스트 하려면 콘솔에 `test:coverage`를 입력하시면 됩니다.
-- 제출은 `코드 샌드박스` 링크, 또는 `깃헙` 커밋 링크를 보내주시면 됩니다.
+**Host**:
+
+- [ ]  Create a Podcast
+- [ ]  Edit a Podcast
+- [ ]  Delete a Podcast
+- [ ]  See Podcast Dashboard (See Listeners and Reviews)
+- [ ]  Upload an Episode
+- [ ]  Edit an Episode
+- [ ]  Delete an Episode
+
+**Listener**:
+
+- [ ]  See Podcast Categories
+- [ ]  Search Podcasts
+- [ ]  See Podcast + Episodes
+- [ ]  Review Podcast
+- [ ]  Subscribe to a Podcast
+- [ ]  See Subscriptions
+- [ ]  See Feed (Episodes of Podcasts the user is subscribed to **combined**)
+
+**React를 이용하여 Audio player를 직접 구현하시면 가산점이 있습니다**
 
 ## **TA's 힌트**
 
-- 백엔드에서도 다뤘던 유닛테스트입니다. 설정과 테스트 방법이 당연하지만 사뭇 다르기 때문에 강의 내용과 문서, 검색 등을 활용하시어 최대한 커버리지를 채우면 되겠습니다.
-- 블루프린트에 웬만한 것들이 셋팅(test-utils.tsx)이 되어 있어서 테스트 설정에 대한 고민은 덜어두시고 쾌적하게 테스트 하시면 되겠습니다.
-- 유닛테스트의 기본목적은 똑같기 때문에, 테스트하려는 스크린, 컴포넌트를 제외한 요소인 데이터 fetching 같은 것은 mocking 해야 합니다. jest의 mockResolvedValue 등을 이용하시면 됩니다.
-- **[act](https://testing-library.com/docs/react-testing-library/api/#act)**나 **[waitFor](https://testing-library.com/docs/dom-testing-library/api-async/#waitfor)**를 잘 활용하셔야 합니다. mutation, query 같은 작업을 서버에 요청하는 작업이나 유저 입력을 mocking하는 부분, 렌더링 부분, state change 등에서 act 나 waitFor를 활용하지 않으시면 원하시는 테스트 결과가 나오지 않을 수 있습니다.
-- apollo client를 이용하여 resolved value를 같은 것을 mocking하실 때, **[\_\_typename](https://www.apollographql.com/docs/react/development-testing/testing/#setting-addtypename)**에 주의하세요.
-- react router dom과 같은 패키지들을 mocking할 때 주의하셔야 합니다. 전체 패키지 중에 일부만 mocking하는 부분이 강의에서 나오는데 참고바랍니다. `힌트: jest.requireActual`
-- handleSubmit 콜백함수 때문에 100% 커버리지 채우기는 어려울 수 있습니다.
+- 마지막 과제입니다. 위의 구현할 것들을 보시면 여태까지 구현 안했던 것들도 있죠? 그럼 프론트엔드와 백엔드를 모두 수정하셔야 합니다.
+- 당연한 이야기지만 백엔드 구현에도 신경을 많이 써주셔야 합니다. Upload Episode를 구현하시려면 파일 업로드도 구현 하셔야겠죠?? 강의에서 다뤘던 /upload 등의 경로를 이용하셔서 s3 등에 업로드 하는 방식으로 구현하시는 것을 추천드립니다
+- 구현하기 어렵다고 포기하지 마시고 하나씩, 하나씩, 천천히 구현해 나가시길 바랍니다. 어려운 부분은 주저 마시고 슬랙이 질문 하셔서 꼭 챌린지 과제 완성하여 제출하시길 바랍니다~!
+- 프론트엔드는 거의 창작의 영역이라 힌트 드릴 것이 없네요. 익숙치 않고 어려우시다면,, 일단 구현 먼저 하시고 다음에 꾸미시길 추천드립니다.
