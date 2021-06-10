@@ -1,18 +1,18 @@
-import { useApolloClient, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Button } from "../../components/button";
 import { FormError } from "../../components/form-error";
 import {
-  createPodcast,
-  createPodcastVariables,
-} from "../../__generated__/createPodcast";
+  createEpisode,
+  createEpisodeVariables,
+} from "../../__generated__/createEpisode";
 
-const CREATE_PODCAST_MUTATION = gql`
-  mutation createPodcast($input: CreatePodcastInput!) {
-    createPodcast(input: $input) {
+const CREATE_EPISODE_MUTATION = gql`
+  mutation createEpisode($input: CreateEpisodeInput!) {
+    createEpisode(input: $input) {
       error
       ok
       id
@@ -20,27 +20,32 @@ const CREATE_PODCAST_MUTATION = gql`
   }
 `;
 
+interface IParams {
+  id: string;
+}
+
 interface IFormProps {
   title: string;
   category: string;
+  podcastId: string;
 }
 
-export const AddPodcast = () => {
-  const client = useApolloClient();
+export const AddEpisode = () => {
+  const { id: podcastId } = useParams<IParams>();
   const history = useHistory();
-  const onCompleted = (data: createPodcast) => {
+  const onCompleted = (data: createEpisode) => {
     const {
-      createPodcast: { ok, id },
+      createEpisode: { ok, id },
     } = data;
     if (ok) {
-      history.push("/");
+      history.push(`/podcasts/${podcastId}`);
     }
   };
 
-  const [createPodcastMutation, { loading, data }] = useMutation<
-    createPodcast,
-    createPodcastVariables
-  >(CREATE_PODCAST_MUTATION, {
+  const [createEpisodeMutation, { loading, data }] = useMutation<
+    createEpisode,
+    createEpisodeVariables
+  >(CREATE_EPISODE_MUTATION, {
     onCompleted,
   });
 
@@ -56,11 +61,12 @@ export const AddPodcast = () => {
   const onSubmit = () => {
     const { title, category } = getValues();
     if (!loading) {
-      createPodcastMutation({
+      createEpisodeMutation({
         variables: {
           input: {
             title,
             category,
+            podcastId: +podcastId,
           },
         },
       });
@@ -70,9 +76,9 @@ export const AddPodcast = () => {
   return (
     <div className="container flex flex-col items-center mt-52">
       <Helmet>
-        <title>Add Podcast | Nomadland</title>
+        <title>Add Episode | Nomadland</title>
       </Helmet>
-      <h4 className="font-semibold text-2xl mb-3">Add Podcast</h4>
+      <h4 className="font-semibold text-2xl mb-3">Add Episode</h4>
       <form
         className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5"
         onSubmit={handleSubmit(onSubmit)}
@@ -99,10 +105,10 @@ export const AddPodcast = () => {
         <Button
           canClick={isValid}
           loading={loading}
-          actionText="Create Podcast"
+          actionText="Create Episode"
         />
-        {data?.createPodcast?.error && (
-          <FormError errorMessage={data.createPodcast.error} />
+        {data?.createEpisode?.error && (
+          <FormError errorMessage={data.createEpisode.error} />
         )}
       </form>
     </div>

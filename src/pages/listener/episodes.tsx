@@ -49,7 +49,8 @@ export const Episodes = () => {
             {data?.getEpisodes.episodes?.map((episode) => (
               <Episode
                 key={episode.id}
-                id={episode.id + ""}
+                id={params.id}
+                episodeId={episode.id + ""}
                 title={episode.title}
                 category={episode.category}
               />

@@ -2,7 +2,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header } from "../components/header";
 import { useMe } from "../hooks/useMe";
 import { NotFound } from "../pages/404";
+import { AddEpisode } from "../pages/host/add-episode";
 import { AddPodcast } from "../pages/host/add-podcast";
+import { EditPodcast } from "../pages/host/edit-podcast";
+import { MyEpisode } from "../pages/host/my-episode";
 import { MyPodcast } from "../pages/host/my-podcast";
 import { MyPodcasts } from "../pages/host/my-podcasts";
 import { Episodes } from "../pages/listener/episodes";
@@ -28,6 +31,18 @@ const hostRoutes = [
   {
     path: "/podcasts/:id",
     component: <MyPodcast />,
+  },
+  {
+    path: "/podcasts/:id/edit-podcast",
+    component: <EditPodcast />,
+  },
+  {
+    path: "/podcasts/:id/add-episode",
+    component: <AddEpisode />,
+  },
+  {
+    path: "/podcasts/:id/episodes/:episodeId",
+    component: <MyEpisode />,
   },
 ];
 const listenerRoutes = [

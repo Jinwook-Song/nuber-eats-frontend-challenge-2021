@@ -29,26 +29,31 @@ export const MyPodcasts = () => {
       </Helmet>
       <div className="max-w-screen-2xl mx-auto mt-32">
         <h2 className="text-4xl font-medium mb-10">My Podcasts</h2>
-        {data?.myPodcasts.ok && data.myPodcasts.podcasts?.length === 0 ? (
-          <>
-            <h4 className="text-xl mb-5">You have no podcasts.</h4>
-            <Link className="text-yellow-400 hover:underline" to="/add-podcast">
-              Create one &rarr;
-            </Link>
-          </>
-        ) : (
-          <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
-            {data?.myPodcasts.podcasts?.map((podcast) => (
-              <Podcast
-                key={podcast.id}
-                id={podcast.id + ""}
-                title={podcast.title}
-                category={podcast.category}
-                rating={podcast.rating}
-              />
-            ))}
-          </div>
-        )}
+
+        <Link
+          to={"/add-podcast"}
+          className=" mr-8 text-white bg-gray-800 py-3 px-10"
+        >
+          Add Podcast &rarr;
+        </Link>
+
+        <div className="mt-10">
+          {data?.myPodcasts.podcasts?.length === 0 ? (
+            <h4 className="text-xl mb-5">Upload a Podcast!</h4>
+          ) : (
+            <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+              {data?.myPodcasts.podcasts?.map((podcast) => (
+                <Podcast
+                  key={podcast.id}
+                  id={podcast.id + ""}
+                  title={podcast.title}
+                  category={podcast.category}
+                  rating={podcast.rating}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
