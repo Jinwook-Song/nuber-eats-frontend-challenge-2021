@@ -39,6 +39,11 @@ export interface LoginInput {
   password: string;
 }
 
+export interface MyEpisodeInputType {
+  id: number;
+  podcastId: number;
+}
+
 export interface MyPodcastInputType {
   id: number;
 }

@@ -1,6 +1,20 @@
-import { useApolloClient } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
 import { useParams } from "react-router";
-import { MY_PODCAST_QUERY } from "./my-podcast";
+import { myEpisode, myEpisodeVariables } from "../../__generated__/myEpisode";
+
+const MY_EPISODE_QUERY = gql`
+  query myEpisode($input: MyEpisodeInputType!) {
+    myEpisode(input: $input) {
+      error
+      ok
+      episode {
+        title
+        category
+      }
+    }
+  }
+`;
 
 interface IParams {
   id: string;
@@ -8,16 +22,16 @@ interface IParams {
 }
 
 export const MyEpisode = () => {
-  const { id, episodeId } = useParams<IParams>();
-  const client = useApolloClient();
-  const { myPodcast } = client.readQuery({
-    query: MY_PODCAST_QUERY,
+  const { id: podcastId, episodeId } = useParams<IParams>();
+  const { data } = useQuery<myEpisode, myEpisodeVariables>(MY_EPISODE_QUERY, {
     variables: {
       input: {
-        id: +id,
+        podcastId: +podcastId,
+        id: +episodeId,
       },
     },
   });
-  console.log(myPodcast);
+  console.log(data);
+
   return <div>My Episode</div>;
 };
