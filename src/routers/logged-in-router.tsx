@@ -4,6 +4,7 @@ import { useMe } from "../hooks/useMe";
 import { NotFound } from "../pages/404";
 import { AddEpisode } from "../pages/host/add-episode";
 import { AddPodcast } from "../pages/host/add-podcast";
+import { EditEpisode } from "../pages/host/edit-episode";
 import { EditPodcast } from "../pages/host/edit-podcast";
 import { MyEpisode } from "../pages/host/my-episode";
 import { MyPodcast } from "../pages/host/my-podcast";
@@ -43,6 +44,10 @@ const hostRoutes = [
   {
     path: "/podcasts/:id/episodes/:episodeId",
     component: <MyEpisode />,
+  },
+  {
+    path: "/podcasts/:id/episodes/:episodeId/edit-episode",
+    component: <EditEpisode />,
   },
 ];
 const listenerRoutes = [

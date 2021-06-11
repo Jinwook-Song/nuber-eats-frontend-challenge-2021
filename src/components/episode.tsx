@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 interface IEpisodeProps {
   id: string;
   episodeId: string;
-  title: string;
-  category: string;
+  title: string | undefined;
+  category: string | undefined;
 }
 
 export const Episode: React.FC<IEpisodeProps> = ({
